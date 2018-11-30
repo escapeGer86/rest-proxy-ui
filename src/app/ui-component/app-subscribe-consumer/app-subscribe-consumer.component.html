@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label for="exampleSelect2" class="text-primary">Select (multiple) topcis for subscription</label>
+  <select multiple="" class="form-control" id="exampleSelect2" [(ngModel)]="cCctx.plannedSubscriptions">
+      <option *ngFor="let topic of topics" [ngValue]="topic"> {{topic}} </option>
+  </select>
+</div>

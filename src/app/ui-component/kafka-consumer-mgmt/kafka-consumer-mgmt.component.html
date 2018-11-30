@@ -1,0 +1,157 @@
+<div class="container">
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/consumerManagement']">Consumers</a>
+        </li>
+        <li class="breadcrumb-item active">Creation</li>
+      </ol>
+    </div>
+  </div>
+  <div class="row mt-1">
+    <div class="col-md-12">
+      <div class="alert alert-dismissible alert-secondary" *ngIf="!alertLinkPresent">
+        <button type="button" class="close" data-dismiss="alert" (click)="alertLinkPresent = !alertLinkPresent">
+          &times;
+        </button>
+        <h4 class="alert-heading">Hint</h4>
+        <p class="mb-0">
+          Each consumer is created and handled at the rest proxy instance - take
+          care of system resources
+        </p>
+        <p class="mb-0">
+          Only "known" Consumers can be analyzed, e.g. those that are created
+          within your session
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Create Consumer > Subscribe Topics</div>
+        <div class='card-body'>
+          <app-slide-panel [activePane]="isLeftVisible ? 'right' : 'left'">
+            <div leftPane>
+              <app-create-consumer [cCctx]="cCctx"></app-create-consumer>
+            </div>
+            <div rightPane>
+              <app-subscribe-consumer [cCctx]="cCctx"></app-subscribe-consumer>
+            </div>
+          </app-slide-panel>
+          <button *ngIf="isLeftVisible" (click)="isLeftVisible = !isLeftVisible" class="btn btn-secondary">Back</button>
+          <button *ngIf="!isLeftVisible" type="submit" class="btn btn-primary pull-right" (click)="submitConsumer($event)">Create</button>
+          <button *ngIf="isLeftVisible" type="submit" class="btn btn-primary pull-right" (click)="subscribeConsumer($event)">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Chose Consumer > Read Topics / Work With Consumer</div>
+        <div class='card-body'>
+          <div class="form-group row">
+            <label for="consumeReconnect" class="col-sm-2 col-form-label text-primary">Reconnect Consumer manually</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="consumeReconnect" aria-describedby="consumeReconnectHelp"
+                placeholder="consumer1/consumer1" [(ngModel)]="reconnectConsumserText" />
+              <small id="consumeReconnectHelp" class="form-text text-muted">following format: 'unique string' :
+                'consumer.consumerGroup/consumer.name'
+              </small>
+            </div>
+            <div class="col-sm-2">
+              <button type="submit" class="btn btn-secondary" (click)="reconnectConsumer($event)">Reconnect Consumer</button>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="consumerChose" class="col-sm-2 col-form-label text-primary">Select a Consumer</label>
+            <div class="col-sm-6">
+              <select class="form-control" id="consumerChose" [(ngModel)]="selectedConsumer">
+                <option *ngFor="let consumer of consumers" [ngValue]="consumer">
+                  {{consumer.consumerGroup}}/{{consumer.name}} with {{consumer.plannedSubscriptions}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <!--Additional Consumer Informations-->
+            <!-- GET /assignments -->
+            <div class="col-sm-4">
+              <label for="assignmentsViewer" class="col-form-label text-primary">Consumer-Assigments:</label>
+            </div>
+            <div class="col-sm-8">
+              <ngx-json-viewer id="assignmentsViewer" [json]='assignments' [expanded]="false"></ngx-json-viewer>
+            </div>
+          </div>
+          <div class="form-group row">
+            <!-- GET /offsets-->
+            <div class="col-sm-4">
+              <label for="offsetsViewer" class="col-form-label text-primary">Consumer-Offsets:</label>
+            </div>
+            <div class="col-sm-8">
+              <ngx-json-viewer id="offsetsViewer" [json]='offsets' [expanded]="false"></ngx-json-viewer>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="offsetEdit" class="col-sm-2 col-form-label text-primary">Set to Position:</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" id="offsetEdit" aria-describedby="offsetEditHelp" placeholder="5"
+                required [(ngModel)]="customOffset" />
+              <small id="offsetEditHelp" class="form-text text-muted">following format: 'integer' : 12
+              </small>
+            </div>
+          </div>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-danger mr-2" (click)="tearDownConsumer($event)">Tear down Consumer</button>
+            <button type="submit" class="btn btn-secondary disabled mr-2" (click)="getOffsetConsumer($event)">Get
+              Offsets</button>
+            <button type="submit" class="btn btn-secondary mr-2" (click)="refreshConsumer($event)">Get Assignments</button>
+            <button type="submit" class="btn btn-secondary mr-2" (click)="setOffsetToBegin($event)">Offset to Begin</button>
+            <button type="submit" class="btn btn-secondary mr-2" (click)="setOffsetToEnd($event)">Offset to End</button>
+            <button type="submit" class="btn btn-secondary mr-2" (click)="overrideOffsetForConsumer($event)">Offset to
+              Position</button>
+            <button type="submit" class="btn btn-secondary mr-2" (click)="commitOffsetForConsumer($event)">Commit
+              Offset</button>
+            <button type="submit" class="btn btn-primary" (click)="readWithConsumer($event)">Read</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Read Result</div>
+        <div class='card-body'>
+          <div class="form-group row">
+            <div class='col-sm-2'>
+              <input [(ngModel)]="searchText" type="text" placeholder="Search..." *ngIf="messages">
+            </div>
+            <div class='col-sm-2'>
+                <label *ngIf="messages">Elements read: {{messages.length}} </label>
+              </div>
+          </div>
+          <div class="form-group row">
+            <table class='table table-hover' *ngIf="messages">
+              <thead>
+                <tr>
+                  <th scope='col'>Key</th>
+                  <th scope='col'>Message</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let message of messages | filterContent : searchText'>
+                  <td>
+                    {{message.key}}
+                  </td>
+                  <td>
+                    <ngx-json-viewer [json]='message' [expanded]="false"></ngx-json-viewer>
+                  </td>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

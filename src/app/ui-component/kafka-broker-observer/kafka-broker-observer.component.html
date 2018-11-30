@@ -1,0 +1,24 @@
+<div class='container'>
+    <div class='row mt-4'>
+        <div class='col-md-12'>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active">Broker Management</li>
+            </ol>
+        </div>
+    </div>
+    <div class='row mt-4'>
+        <div class='col-md-12'>
+            <!--für meldungen ..-->
+        </div>
+    </div>
+    <div class='row mt-4'>
+        <div class='col-md-12'>
+            <button type='submit' class='btn btn-primary' (click)=onSubmit($event)>Get Broker Info</button>
+        </div>
+    </div>
+    <div class='row mt-4'>
+        <div class='col-md-12'>
+            <ngx-json-viewer [json]='brokerInfo'></ngx-json-viewer>
+        </div>
+    </div>
+</div>

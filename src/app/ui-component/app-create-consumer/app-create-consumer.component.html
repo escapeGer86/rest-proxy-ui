@@ -1,0 +1,108 @@
+<div class="form-group">
+  <label for="consumeGroup" class="text-primary">Consumer Group</label>
+  <input type="text" class="form-control" id="consumeGroup" aria-describedby="consumeGroupHelp" placeholder="MyPersonalConsumerGroup"
+    required [(ngModel)]="cCctx.consumerGroup" />
+  <small id="consumerGroupHelp" class="form-text text-muted">following format: 'unique string' :
+    'MyConsumerGroup'
+  </small>
+</div>
+<div class="form-group">
+  <label for="consumeName" class="text-primary">Consumer Name</label>
+  <input type="text" class="form-control" id="consumerName" aria-describedby="consumerNameHelp" placeholder="MyPersonalTopicConsument"
+    required [(ngModel)]="cCctx.name" />
+  <small id="consumerNameHelp" class="form-text text-muted">following format: 'unique string' :
+    'MyPersonalTopicConsument_45aef0x44'
+  </small>
+</div>
+<div class="form-group row">
+  <label for="staticContentType" class="col-sm-2 col-form-label text-primary">Content-Type:</label>
+  <div class="col-sm-3">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticPartConentType" value="application/vnd.kafka." />
+  </div>
+  <div class="col-sm-2">
+    <select class="form-control" id="embeddedFormatSelect" [(ngModel)]="cCctx.contentType.embeddedFormat">
+      <option>json</option>
+      <option>binary</option>
+      <option>avro</option>
+    </select>
+  </div>
+  <div class="col-sm">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticPint1" value="." />
+  </div>
+  <div class="col-sm-2">
+    <select class="form-control" id="apiVersionSelect" [(ngModel)]="cCctx.contentType.apiVersion">
+      <option>v2</option>
+      <option>v1</option>
+    </select>
+  </div>
+  <div class="col-sm">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticPint1" value="+" />
+  </div>
+  <div class="col-sm-2">
+    <select class="form-control" id="serializationFormatSelect" [(ngModel)]="cCctx.contentType.seraializationFormat">
+      <option>json</option>
+    </select>
+  </div>
+</div>
+<!--staticAccept-->
+<div class="form-group row">
+  <label for="staticAccept" class="col-sm-2 col-form-label text-primary">Accept:</label>
+  <div class="col-sm-3">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticAccept" value="application/vnd.kafka." />
+  </div>
+  <div class="col-sm-2">
+    <select class="form-control" id="apiVersionSelect1" [(ngModel)]="cCctx.accept.apiVersion">
+      <option>v2</option>
+      <option>v1</option>
+    </select>
+  </div>
+  <div class="col-sm">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticPint2" value="+" />
+  </div>
+  <div class="col-sm-2">
+    <select class="form-control" id="serializationFormatSelect1" [(ngModel)]="cCctx.accept.seraializationFormat">
+      <option>json</option>
+    </select>
+  </div>
+</div>
+<!--format-->
+<div class="form-group row">
+    <label for="consumerFormatSelect" class="col-sm-2 col-form-label text-primary">Format:</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="consumerFormatSelect">
+        <option>json</option>
+        <option>binary</option>
+        <option>avro</option>
+      </select>
+    </div>
+</div>
+<!--auto.offset.reset -->
+<div class="form-group row">
+    <label for="consumerOffsetReset" class="col-sm-2 col-form-label text-primary">Auto.offset.reset:</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="consumerOffsetReset">
+          <option>earliest</option>
+        </select>
+    </div>
+</div>
+<!--auto.commit.enable -->
+<div class="form-group row">
+    <label for="consumerCommitEnable" class="col-sm-2 col-form-label text-primary">Auto.commit.enable:</label>
+    <div class="col-sm-3">
+      <select class="form-control" id="consumerCommitEnable">
+        <option>true</option>
+        <option>false</option>
+      </select>    
+    </div>
+</div>
+<div class="alert alert-dismissible alert-danger" *ngIf="alertLinkPresent">
+  <button type="button" class="close" data-dismiss="alert"  (click)="alertLinkPresent = !alertLinkPresent">&times;</button>
+  <strong>Oh snap!</strong>
+  <a href="#" class="alert-link">Change a few things up</a> and try submitting
+  again. Only visible in Case of Errors
+</div>
+<!--
+  button type='submit' class='btn btn-primary m-4' (click)=onSubmitSubscribe($event)>Subscribe </button>
+  <button type='submit' class='btn btn-primary m-4' (click)=onSubmitConsume($event)>Consume</button>
+  <button type='submit' class='btn btn-primary m-4' (click)=onSubmitUnsubsribe($event)>Tear down</button
+-->

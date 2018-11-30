@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row mt-4">
+    <!-- card one -->
+    <div class="col-md-3">
+      <div class="zoom">
+        <div class="card border-primary mb-3" style="max-width: 20rem;" (click)="routingTopics()">
+          <div class="card-header">Topics / Partitions</div>
+          <div class="card-body">
+            <h4 class="card-title">Check Topics & Partitions</h4>
+            <p class="card-text">Browser / Create / Delete Topics and Partitions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- card two-->
+    <div class="col-md-3">
+      <div class="zoom">
+        <div class="card border-primary mb-3" style="max-width: 20rem;" (click)="routingConsumers()">
+          <div class="card-header">Consumers</div>
+          <div class="card-body">
+            <h4 class="card-title">Check Consumers</h4>
+            <p class="card-text">Browser / Create / Delete Consumers and Subscriptions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- card three-->
+    <div class="col-md-3">
+      <div class="zoom">
+        <div class="card border-primary mb-3" style="max-width: 20rem;" (click)="routingBroker()">
+          <div class="card-header">Brokers</div>
+          <div class="card-body">
+            <h4 class="card-title">Check Brokers</h4>
+            <p class="card-text">Get a list of brokers. That's it! Nothing more to show here ... </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- card four-->
+    <div class="col-md-3">
+      <div class="zoom">
+        <div class="card border-secondary mb-3" style="max-width: 20rem;"(click)="routingMetrics()">
+          <div class="card-header text-muted">Monitoring Metrics</div>
+          <div class="card-body">
+            <h4 class="card-title text-mutedy">Availbale soon</h4>
+            <p class="card-text text-muted">See which consumers are behind, which Topics are without subscriptions...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

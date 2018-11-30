@@ -1,0 +1,12 @@
+<mat-sidenav-container class="example-container">
+    <mat-sidenav position="end" #sidenav mode="over" [(opened)]="opened">
+        <app-log-display></app-log-display>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <p>
+            <mat-checkbox [(ngModel)]="opened">Show API Log</mat-checkbox>
+        </p>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

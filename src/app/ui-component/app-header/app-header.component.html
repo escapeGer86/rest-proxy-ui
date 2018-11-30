@@ -1,0 +1,28 @@
+<div class="alert alert-dismissible alert-info"  *ngIf="alertLinkPresent">
+    <button type="button" class="close" data-dismiss="alert" (click)="alertLinkPresent = !alertLinkPresent">&times;</button>
+    <p class="mb-0">A disabled proxy urls assumes that a location "/api" exists on your webserver and all requests are redirected to the Rest-Proxy-Api. 
+      If you use a full qualified url, make sure, that the Backend-API allows CORS.</p>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="col-md-1">
+  <a routerLink="" class="navbar-brand" href="#">
+    <i class="fa fa-home"></i>
+  </a>
+  </div>
+
+  <div class="col-md-3">
+    <a class="navbar-brand" href="#">Rest Proxy UI</a>
+  </div>
+
+  <div class="col-md-1">
+      <mat-checkbox class="example-margin pull-right" [(ngModel)]="proxyUrlEnabled">Set Url manually</mat-checkbox>
+  </div>
+  <div class="col-md-5">
+      <input type='text' class='form-control' id='brokerUrl' aria-describedby='brokerUrlHelp' placeholder='default: "/api/", Proxy URL Example : http://192.168.99.100:8082'
+      [(ngModel)]='brokerUrl' [disabled]="!proxyUrlEnabled">
+  </div>
+  <div>
+      <button type='submit' class='btn btn-secondary' (click)=onSubmit($event)>Set Url as Context</button>
+   </div>
+
+</nav>

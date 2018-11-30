@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active">Logging Overview</li>
+        </ol>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-md-12">
+        <table class='table table-responsive table-hover' *ngIf="logTableEntries">
+          <thead>
+            <tr>
+              <th scope='col'>Request Location</th>
+              <th scope='col'>Request Method</th>
+              <th scope='col'>Request Body</th>
+              <th scope='col'>Response Status</th>
+              <th scope='col'>Response Body</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor='let rRp of logTableEntries'>
+              <td class="w-25">{{rRp.requestLocation}}</td>
+              <td class="w-25">{{rRp.requestMethod}}</td>
+              <td class="w-25">{{rRp.requestBsody}}</td>
+              <td class="w-25">{{rRp.responseStatus}}</td>
+              <td class="w-25">
+                  <ngx-json-viewer id="assignmentsViewer" [json]='rRp.responseBody' [expanded]="false"></ngx-json-viewer>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

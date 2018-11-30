@@ -1,0 +1,216 @@
+<div class='container'>
+  <div class='row mt-4'>
+    <div class='col-md-12'>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a [routerLink]="['/topicManagement']">Topics</a> </li>
+        <li class="breadcrumb-item"> <a [routerLink]="['/viewTopic', topic]">{{topic}}</a></li>
+        <li class="breadcrumb-item active">Informations </li>
+      </ol>
+    </div>
+  </div>
+  <!--Erste Reihe für Hinweise -->
+  <!--div class='row mt-4'>
+    <div class='col-md-12'>
+        <div class="alert alert-dismissible alert-primary">
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <h4 class='alert-heading'>Hinweis!</h4>
+        <p class='mb-0'>Konsument angeben - dann auf 'Create' dann auf  'Subscribe' klicken!</p>
+        <p class='mb-0'>Danach können mit 'Consume' Nachrichten gelesen werden!</p>
+      </div>
+    </div>
+  </div-->
+  <!-- Topic Config -->
+  <div class='row mt-4'>
+    <div class='col-md-2'>
+      <button type='submit' class='btn btn-primary m-1'>Refresh Topic Config</button>
+    </div>
+    <div class='col-md-10'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Topic Configuration</div>
+        <div class='card-body'>
+          <ngx-json-viewer [json]='topicInfos' [expanded]="false"></ngx-json-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Partitions-->
+  <div class='row mt-4'>
+    <div class='col-md-2'>
+      <button type='submit' class='btn btn-primary m-1'>Refresh Partitions</button>
+    </div>
+    <div class='col-md-10'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Partition Configuration</div>
+        <div class='card-body'>
+          <ngx-json-viewer [json]='partitionInfos' [expanded]="false"></ngx-json-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Subscribers to Topic -->
+  <div class='row mt-4'>
+    <div class='col-md-2'>
+    </div>
+    <div class='col-md-10'>
+      <div class="alert alert-dismissible alert-secondary">
+        <button type='button' class='close' data-dismiss='alert'>&times;</button>
+        <h4 class='alert-heading'>Hint</h4>
+        <p class='mb-0'>Only "known" Consumers can be analyzed, e.g. those that are created within your session</p>
+      </div>
+    </div>
+  </div>
+  <div class='row mt-4'>
+    <div class='col-md-2'>
+      <button type='submit' class='btn btn-primary m-1'>Refresh Subscribers</button>
+    </div>
+    <div class='col-md-10'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Subscribers to Topic</div>
+        <div class='card-body'>
+          <ngx-json-viewer [json]='subscriberInfos' [expanded]="false"></ngx-json-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Section: Write Content to Topic -->
+  <div class='row mt-4'>
+    <div class='col-md-12'>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a [routerLink]="['/topicManagement']">Topics</a> </li>
+        <li class="breadcrumb-item"> <a [routerLink]="['/viewTopic', topic]">{{topic}}</a></li>
+        <li class="breadcrumb-item active">Write Content to Topic </li>
+      </ol>
+    </div>
+  </div>
+  <div class='row mt-4'>
+    <div class='col-md-12'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Post Content to Topic</div>
+        <div class='card-body'>
+          <div class="form-group row">
+            <label for="staticContentType" class="col-sm-2 col-form-label text-primary">Content-Type:</label>
+            <div class="col-sm-3">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticPartConentType" value="application/vnd.kafka.">
+            </div>
+            <div class="col-sm-2">
+              <select class="form-control" id="embeddedFormatSelect" [(ngModel)]="contentType.embeddedFormat">
+                <option>json</option>
+                <option>binary</option>
+                <option>avro</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticPint1" value=".">
+            </div>
+            <div class="col-sm-2">
+              <select class="form-control" id="apiVersionSelect" [(ngModel)]="contentType.apiVersion">
+                <option>v2</option>
+                <option>v1</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticPint1" value="+">
+            </div>
+            <div class="col-sm-2">
+              <select class="form-control" id="serializationFormatSelect" [(ngModel)]="contentType.seraializationFormat">
+                <option>json</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="staticAccept" class="col-sm-2 col-form-label text-primary">Accept:</label>
+            <div class="col-sm-3">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticAccept" value="application/vnd.kafka.">
+            </div>
+            <div class="col-sm-2">
+              <select class="form-control" id="apiVersionSelect1" [(ngModel)]="accept.apiVersion">
+                <option>v2</option>
+                <option>v1</option>
+              </select>
+            </div>
+            <div class="col-sm">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticPint2" value="+">
+            </div>
+            <div class="col-sm-2">
+              <select class="form-control" id="serializationFormatSelect1" [(ngModel)]="accept.seraializationFormat">
+                <option>json</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="exampleTextarea" class="col-sm-2 text-primary">Body Content:</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="exampleTextarea" rows="10" [(ngModel)]="body"></textarea>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3">
+              <button type='submit' class='btn btn-primary m-1' (click)='onSubmitTopicContent($event)'>Submit Content
+                to Topic</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Section: Content of Topic -->
+  <!--div class='row mt-4'>
+    <div class='col-md-12'>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"> <a [routerLink]="['/topicManagement']">Topics</a> </li>
+        <li class="breadcrumb-item"> <a [routerLink]="['/viewTopic', topic]">{{topic}}</a></li>
+        <li class="breadcrumb-item active">Read Content of Topic </li>
+      </ol>
+    </div>
+  </div-->
+
+  <!--div class='row mt-4'>
+    <div class='col-md-12'>Wizzard</div>
+  </div-->
+
+  <!-- 3. Reihe - Create consumer -->
+  <!--div class='row mt-4'>
+    <div class='col-md-12'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Register and User Consumer</div>
+        <div class='card-body'>
+          <div class='form-group'>
+            <label for='consumeName'>Consumer Name</label>
+            <input type='text' class='form-control' id='consumerName' aria-describedby='consumerNameHelp' placeholder='MyPersonalTopicConsument'
+              required [(ngModel)]='consumerName'>
+            <small id='consumerNameHelp' class='form-text text-muted'>Folgendes format: 'serverweit eindeutiger String' : 'MyPersonalTopicConsument_45aef0x44' </small>
+          </div>
+            <button type='submit' class='btn btn-primary m-4' (click)=onSubmit($event)>Create</button>
+            <button type='submit' class='btn btn-primary m-4' (click)=onSubmitSubscribe($event)>Subscribe </button>
+            <button type='submit' class='btn btn-primary m-4' (click)=onSubmitConsume($event)>Consume</button>
+            <button type='submit' class='btn btn-primary m-4' (click)=onSubmitUnsubsribe($event)>Tear down</button>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class='row mt-4'>
+    <div class='col-md-12'>
+      <div class='card border-primary mb-3'>
+        <div class='card-header'>Topic Content</div>
+        <div class='card-body'>
+            <table class='table table-hover' *ngIf="messages">
+                <thead>
+                  <tr>
+                    <th scope='col'></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let message of messages; let i = index'>
+                      <td>
+                          <ngx-json-viewer [json]='message'></ngx-json-viewer>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div-->
+
+</div>
