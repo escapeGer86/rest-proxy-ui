@@ -23,7 +23,7 @@ Set up an apache httpd.
 ### Configuration
 
 httpd.conf
----------------------
+```bash
 [...]
 LoadModule proxy_http_module modules/mod_proxy_http.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
@@ -31,15 +31,15 @@ LoadModule proxy_http_module modules/mod_proxy_http.so
 
 ProxyRequests Off
 ProxyPreserveHost Off
- 
 ProxyPass /api/ <API Location>
 ProxyPassReverse /api/ <API Location>
----------------------
-	
+```
+
 ### Angular Applucation
 
 Build Application
 Move files from dist-Folder to your htdoc-Folder
+
 Configure typical angular redirects....
 
 Ready!
