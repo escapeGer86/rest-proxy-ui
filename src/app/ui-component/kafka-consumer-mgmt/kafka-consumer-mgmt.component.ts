@@ -16,6 +16,7 @@ export class KafkaConsumerMgmtComponent implements OnInit {
   cCctx: ConsumerCreationContext = new ConsumerCreationContext();
 
   consumers;
+  alertLinkPresent;
   selectedConsumer;
   messages;
   offsets;

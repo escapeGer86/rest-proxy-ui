@@ -8,11 +8,15 @@ import { AppContextService } from '../../services/app-context.service';
   styleUrls: ['./kafka-observer.component.scss']
 })
 export class KafkaObserverComponent implements OnInit {
-  constructor(private _kafkaBroker: KafkaRestStubService, private _contextService: AppContextService) {}
+
   topics;
   topicData;
   brokerUrl;
   settings;
+  alertLinkPresent;
+
+  constructor(private _kafkaBroker: KafkaRestStubService, private _contextService: AppContextService) {}
+
 
   ngOnInit() {
     this.settings = {
@@ -27,8 +31,7 @@ export class KafkaObserverComponent implements OnInit {
   }
 
   onSubmit(event) {
-    this._kafkaBroker.url = this._contextService.proxyUrl; // store url for later use
-    this._kafkaBroker.getAllTopics(this._kafkaBroker.url).subscribe(res => {
+    this._kafkaBroker.getAllTopics(this._contextService.proxyUrl).subscribe(res => {
       this.topics = res;
     });
   }

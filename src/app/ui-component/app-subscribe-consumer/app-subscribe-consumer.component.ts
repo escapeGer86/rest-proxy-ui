@@ -17,7 +17,7 @@ export class AppSubscribeConsumerComponent implements OnInit {
   constructor(private _kafkaBroker: KafkaRestStubService, private _contextService: AppContextService) { }
 
   ngOnInit() {
-    this._kafkaBroker.getAllTopics(this._kafkaBroker.url).subscribe(res => {
+    this._kafkaBroker.getAllTopics(this._contextService.proxyUrl).subscribe(res => {
       // just receive the message and log it to the console:
       this.topics = res;
 

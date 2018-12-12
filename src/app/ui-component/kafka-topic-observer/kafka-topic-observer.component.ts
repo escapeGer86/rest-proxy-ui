@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KafkaRestStubService } from '../../services/kafka-rest-stub.service';
 import { ActivatedRoute } from '@angular/router';
 import { ContentTypes } from '../../model/contentType/content-types';
+import { AppContextService } from '../../services/app-context.service';
 
 @Component({
   selector: 'app-kafka-topic-observer',
@@ -13,6 +14,7 @@ export class KafkaTopicObserverComponent implements OnInit {
   topic;
   topicInfos;
   partitionInfos;
+  subscriberInfos;
 
   consumerName;
   hint;
@@ -22,7 +24,7 @@ export class KafkaTopicObserverComponent implements OnInit {
   contentType: ContentTypes;
   body: string;
 
-  constructor(private _kafkaBroker: KafkaRestStubService, private route: ActivatedRoute) {
+  constructor(private _kafkaBroker: KafkaRestStubService, private route: ActivatedRoute, private _contextService: AppContextService) {
     this.accept = new ContentTypes();
     this.contentType = new ContentTypes();
    }
@@ -36,13 +38,13 @@ export class KafkaTopicObserverComponent implements OnInit {
       this.topic = params['topic'];
     });
 
-    this._kafkaBroker.getTopic(this._kafkaBroker.url, this.topic).subscribe(res => {
+    this._kafkaBroker.getTopic(this._contextService.proxyUrl, this.topic).subscribe(res => {
       // just receive the message and log it to the console:
       console.log(res);
       this.topicInfos = res;
     });
 
-    this._kafkaBroker.getPartitions(this._kafkaBroker.url, this.topic, 'application/vnd.kafka.v2+json').subscribe(res => {
+    this._kafkaBroker.getPartitions(this._contextService.proxyUrl, this.topic, 'application/vnd.kafka.v2+json').subscribe(res => {
       // just receive the message and log it to the console:
       console.log(res);
       this.partitionInfos = res;
@@ -71,7 +73,7 @@ export class KafkaTopicObserverComponent implements OnInit {
     console.log(this.contentType.getContentType());
     console.log(this.accept.getAcceptType());
     console.log(this.body);
-    this._kafkaBroker.postContentToTopic(this._kafkaBroker.url,
+    this._kafkaBroker.postContentToTopic(this._contextService.proxyUrl,
       this.topic, this.contentType.getContentType(), this.accept.getAcceptType(), this.body).subscribe(res => {
         // just receive the message and log it to the console:
         console.log(res);

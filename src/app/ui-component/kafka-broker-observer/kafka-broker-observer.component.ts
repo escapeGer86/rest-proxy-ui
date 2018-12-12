@@ -16,8 +16,7 @@ export class KafkaBrokerObserverComponent implements OnInit {
   }
 
   onSubmit(event) {
-    this._kafkaBroker.url = this._contextSerivce.proxyUrl;
-    this._kafkaBroker.getBrokers(this._kafkaBroker.url).subscribe(res => {
+    this._kafkaBroker.getBrokers(this._contextSerivce.proxyUrl).subscribe(res => {
       // just receive the message and log it to the console:
       this.brokerInfo = res;
 
