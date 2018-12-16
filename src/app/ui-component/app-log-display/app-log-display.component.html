@@ -22,7 +22,9 @@
             <tr *ngFor='let rRp of logTableEntries'>
               <td class="w-25">{{rRp.requestLocation}}</td>
               <td class="w-25">{{rRp.requestMethod}}</td>
-              <td class="w-25">{{rRp.requestBsody}}</td>
+              <td class="w-25">
+                <ngx-json-viewer id="assignmentsViewer" [json]='rRp.requestBody' [expanded]="false"></ngx-json-viewer>
+              </td>
               <td class="w-25">{{rRp.responseStatus}}</td>
               <td class="w-25">
                   <ngx-json-viewer id="assignmentsViewer" [json]='rRp.responseBody' [expanded]="false"></ngx-json-viewer>
