@@ -17,4 +17,19 @@ export class AppCreateConsumerComponent implements OnInit {
   ngOnInit() {
   }
 
+  submitConsumerPresetJSON(event) {
+    this.cCctx.contentType.embeddedFormat = 'json';
+    this.cCctx.format = 'json';
+  }
+
+  submitConsumerPresetAVRO(event) {
+    this.cCctx.contentType.embeddedFormat = 'avro';
+    this.cCctx.format = 'avro';
+  }
+
+  submitConsumerPresetBINARY(event) {
+    this.cCctx.contentType.embeddedFormat = 'binary';
+    this.cCctx.format = 'binary';
+  }
+
 }

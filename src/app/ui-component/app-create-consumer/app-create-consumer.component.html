@@ -14,6 +14,31 @@
     'MyPersonalTopicConsument_45aef0x44'
   </small>
 </div>
+<!-- presets -->
+<div class="form-group row">
+  <div class="col-sm-3">  
+      <label for="consumeName" class="text-primary">Choose a configuration:</label>
+  </div>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-secondary" (click)="submitConsumerPresetJSON($event)">Preset JSON</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-secondary" (click)="submitConsumerPresetAVRO($event)">Preset AVRO</button>
+  </div>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-secondary" (click)="submitConsumerPresetBINARY($event)">Preset BINARY</button>
+  </div>
+  <div class="col-sm-3">  
+      <label for="consumeName" class="text-secondary">or select dropwdowns on your own:</label>
+
+  </div>
+</div>
+<div class="form-group row">
+    <div class="col-sm-12">  
+      <hr>
+    </div>
+</div>
+<!--detail settings for consumer -->
 <div class="form-group row">
   <label for="staticContentType" class="col-sm-2 col-form-label text-primary">Content-Type:</label>
   <div class="col-sm-3">
@@ -101,8 +126,8 @@
   <a href="#" class="alert-link">Change a few things up</a> and try submitting
   again. Only visible in Case of Errors
 </div>
-<!--
-  button type='submit' class='btn btn-primary m-4' (click)=onSubmitSubscribe($event)>Subscribe </button>
-  <button type='submit' class='btn btn-primary m-4' (click)=onSubmitConsume($event)>Consume</button>
-  <button type='submit' class='btn btn-primary m-4' (click)=onSubmitUnsubsribe($event)>Tear down</button
--->
+<div class="form-group row">
+    <div class="col-sm-12">  
+      <hr>
+    </div>
+</div>
